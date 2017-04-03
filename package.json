@@ -11,6 +11,9 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "commander": "^2.9.0",
+    "lodash": "^4.17.4",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.0"
   },

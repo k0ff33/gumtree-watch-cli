@@ -1,6 +1,7 @@
 const program = require('commander')
 const gumtree = require('./gumtree')
-const storage = require('./storage')
+const db = require('./db')
+const pushbullet = require('./transport/pushbullet')
 
 program
   .version('0.1.0')
@@ -12,12 +13,14 @@ if (!program.url) {
 }
 
 gumtree.getOffers(program.url)
-  .then(data => {
-    if (process.env.apiKey) {
-      console.log(storage.test())
-      // todo
-    } else {
-      console.log(data)
+  .then(data => db.compareData(data, program.url))
+  .then(diff => {
+    if (process.env.apiKey && diff) {
+      for (let deal of diff) {
+        console.log(deal)
+        pushbullet.sendMessage(process.env.deviceId, 'Gumtree Alert', `(${deal.price}) ${deal.name}`, deal.url)
+      }
     }
   })
   .then(() => process.exit())
+  .catch(console.error)

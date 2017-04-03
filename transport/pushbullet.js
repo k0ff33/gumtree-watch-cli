@@ -6,7 +6,7 @@ const pushbullet = {
   sendMessage
 }
 
-function sendMessage (deviceId, title, body, url, callback) {
+function sendMessage (deviceId = null, title, body, url, callback) {
   let options = {
     method: 'POST',
     uri: 'https://api.pushbullet.com/v2/pushes',
