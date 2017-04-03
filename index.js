@@ -16,7 +16,7 @@ gumtree.getOffers(program.url)
   .then(data => db.compareData(data, program.url))
   .then(diff => {
     let promises = []
-    if (process.env.apiKey && diff && diff.length > 0) {
+    if (diff && diff.length > 0) {
       for (let deal of diff) {
         console.log(deal)
         promises.push(pushbullet.sendMessage(process.env.deviceId, 'Gumtree Alert', `(${deal.price}) ${deal.name}`, deal.url))

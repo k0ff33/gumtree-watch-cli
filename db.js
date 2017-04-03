@@ -17,9 +17,11 @@ function compareData (data, url) {
         return db.update({ url }, { $set: { data } })
         .then(() => diff)
       } else {
+        console.log('No new listings')
         return null
       }
     } else {
+      console.log('First run: data cached')
       return db.insert({url, data})
     }
   })
