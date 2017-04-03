@@ -15,7 +15,7 @@ if (!program.url) {
 gumtree.getOffers(program.url)
   .then(data => db.compareData(data, program.url))
   .then(diff => {
-    if (process.env.apiKey && diff) {
+    if (process.env.apiKey && diff && diff.length > 0) {
       for (let deal of diff) {
         console.log(deal)
         pushbullet.sendMessage(process.env.deviceId, 'Gumtree Alert', `(${deal.price}) ${deal.name}`, deal.url)
