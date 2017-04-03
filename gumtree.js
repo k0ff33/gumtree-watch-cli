@@ -17,7 +17,7 @@ function getOffers (url) {
 
         offers.push({
           link: 'https://www.gumtree.com' + offer.find('.listing-link').attr('href'),
-          name: offer.find('.listing-title').text().replace('\n', ''),
+          name: offer.find('.listing-title').text().replace(/\n/g, ''),
           price: offer.find('.listing-price strong').text()
         })
       })

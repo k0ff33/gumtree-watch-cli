@@ -1,5 +1,6 @@
 const program = require('commander')
 const gumtree = require('./gumtree')
+const storage = require('./storage')
 
 program
   .version('0.1.0')
@@ -10,9 +11,13 @@ if (!program.url) {
   program.help()
 }
 
-if (process.env.apiKey) {
-  
-} else {
-  gumtree.getOffers(program.url)
-    .then(console.log)
-}
+gumtree.getOffers(program.url)
+  .then(data => {
+    if (process.env.apiKey) {
+      console.log(storage.test())
+      // todo
+    } else {
+      console.log(data)
+    }
+  })
+  .then(() => process.exit())
