@@ -1,3 +1,7 @@
+'use strict'
+
+process.chdir(__dirname)
+
 const program = require('commander')
 const gumtree = require('./gumtree')
 const db = require('./db')
